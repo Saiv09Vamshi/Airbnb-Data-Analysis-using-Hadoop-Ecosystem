@@ -1,0 +1,29 @@
+To start the script:
+./start_script.sh
+
+Get the data into HDFS
+$hdfs dfs -mkdir /rawdata
+
+Now put the required files at the particular available location to the created directory (rawdata)
+$hdfs dfs -put Desktop/listings.csv/rawdata
+
+how let us launch the hive
+type hive in the terminal
+now hive is activated
+
+let us create a database using hive
+>create database Database_One with dbproperties("created_by"="Sai Vamshi", "purpose"="Project");
+
+Now let us call the database properties
+>desc database extended Database_One;
+
+Now let us use the created database to create tables and run the complex queries
+>use database Database_One;
+>create table listings (id string, name string, host_id int, host_name string, neighbourhood_group int, 
+                       neighbourhood int, latitude float, longitude float, room_type string, price float, 
+                       minimum_nights int, number_of_reviews int, last_review date, reviews_per_month int, 
+                       calculated_host_listings_count int,availability_365 int, number_of_reviews_ltm int, 
+                       license int) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'WITH SERDEPROPERTIES("separatorChar" = ",","quoteChar"= "\"");
+
+Now let us
+
