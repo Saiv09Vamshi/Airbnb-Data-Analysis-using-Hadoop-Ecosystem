@@ -19,11 +19,29 @@ Now let us call the database properties
 
 Now let us use the created database to create tables and run the complex queries
 >use database Database_One;
->create table listings (id string, name string, host_id int, host_name string, neighbourhood_group int, 
+>create table listings_Two (id string, name string, host_id int, host_name string, neighbourhood_group int, 
                        neighbourhood int, latitude float, longitude float, room_type string, price float, 
                        minimum_nights int, number_of_reviews int, last_review date, reviews_per_month int, 
                        calculated_host_listings_count int,availability_365 int, number_of_reviews_ltm int, 
                        license int) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'WITH SERDEPROPERTIES("separatorChar" = ",","quoteChar"= "\"");
 
-Now let us
+Now let us import the data available in the csv file to the listings table
+>load data inpath '/rawdata/Desktop/listings.csv' into table listings_Two;
+
+#Now let us create some questions and write queries to solve those questions.
+
+1. Assuming the number of reviews implies popularity, write a query that can find what the 
+   Top 10 most popular neighborhoods are in your location by number of reviews? 
+   (Take a screenshot of your query and the results)
+
+2. The total number of reviews might imply popularity but not recency, write a query that can find the name of the 10 hosts 
+   who have the most recent reviews at your location? (Take a screenshot of your results)  
+
+3. Validate that the two files were pulled at the same time and calculate the total number of reviews per host on the reviews table and 
+   compare it to the total number_of_reviews on the listing table? Compare the top 10 hosts for your location. 
+
+4. Write your own question to the Airbnb database that a business analyst might be ask to give an answer to their CEO. This could be about listings under one host, 
+   characteristics of listings in relationship to price, neighbourhood characteristics, etc. 
+   This can be a simple business research question with a straightforward answer but it should be an original question. 
+
 
