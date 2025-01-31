@@ -32,16 +32,25 @@ Now let us import the data available in the csv file to the listings table
 
 1. Assuming the number of reviews implies popularity, write a query that can find what the 
    Top 10 most popular neighborhoods are in your location by number of reviews? 
-   (Take a screenshot of your query and the results)
+
+> SELECT neighbourhood, SUM(number_of_reviews) AS total_reviews from listings_TWO GROUP BY neighbourhood ORDER BY total_reviews DESC LIMIT 10;
 
 2. The total number of reviews might imply popularity but not recency, write a query that can find the name of the 10 hosts 
-   who have the most recent reviews at your location? (Take a screenshot of your results)  
+   who have the most recent reviews at your location? 
+
+>SELECT host_name, MAX(last_review) as most_recnt_review FROM listings_Two on listings_Two.id = reviews_Two.listing_id GROUP BYhost_name ORDER BY most_recent_review DESC LIMIT 10;
 
 3. Validate that the two files were pulled at the same time and calculate the total number of reviews per host on the reviews table and 
    compare it to the total number_of_reviews on the listing table? Compare the top 10 hosts for your location. 
 
+> SELECT l.host_id,l.host_name,l.number_of_reviews, COALESCE(r.listing_id) as total_reviews from listings_Two l LEFT JOIN r reviews_Two ON l.id = r.listing_id GROUP By l.host_id, l.host_name ORDER BY total_reviews DESC LIMIT 10;
+
 4. Write your own question to the Airbnb database that a business analyst might be ask to give an answer to their CEO. This could be about listings under one host, 
    characteristics of listings in relationship to price, neighbourhood characteristics, etc. 
    This can be a simple business research question with a straightforward answer but it should be an original question. 
+
+For this I found out the average price in each neighnourhood
+
+>SELECT neighbourhood, AVG(price) as AVG_PRICE from listings_Two GROUP BY neighbourhood ORDER BY AVG_PRICE DESC LIMIT 10;
 
 
